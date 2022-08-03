@@ -1,0 +1,53 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@intlify/nuxt3": "^0.2.2",
+    "@nuxtjs/eslint-config-typescript": "^10.0.0",
+    "@nuxtjs/tailwindcss": "^5.0.3",
+    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/vue3": "^6.4.22",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "@vueuse/core": "^8.7.5",
+    "@vueuse/nuxt": "^8.7.5",
+    "autoprefixer": "^10.4.4",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "nuxt": "^3.0.0-rc.6",
+    "postcss": "^8.4.12",
+    "sass": "^1.51.0",
+    "sass-loader": "10",
+    "storybook-builder-vite": "^0.1.23",
+    "tailwindcss": "^3.0.24",
+    "typescript": "^4.7.4",
+    "vite-plugin-eslint": "^1.6.1",
+    "vue-tsc": "^0.38.2"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^0.20.0",
+    "@codemirror/commands": "^0.20.0",
+    "@codemirror/lang-python": "^0.20.0",
+    "@codemirror/language": "^0.20.0",
+    "@codemirror/lint": "^0.20.1",
+    "@codemirror/search": "^0.20.1",
+    "@codemirror/state": "^0.20.0",
+    "@codemirror/view": "^0.20.3",
+    "@nuxtjs/yandex-metrika": "^1.4.0",
+    "@pinia/nuxt": "^0.3.0",
+    "@vueuse/components": "^8.7.5",
+    "@zoomus/websdk": "^2.4.5",
+    "click-outside-vue3": "^4.0.1",
+    "jsrsasign": "^10.5.25",
+    "splitpanes": "^3.1.1",
+    "swiper": "^8.3.1",
+    "vue-awesome-swiper": "^5.0.1"
+  }
+}

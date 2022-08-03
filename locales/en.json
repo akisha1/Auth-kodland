@@ -1,0 +1,88 @@
+{
+  "auth": {
+    "slogan": "School of digital skills for children and teenagers",
+    "slider": {
+      "slide1": {
+        "title": "Welcome to Kodland",
+        "description": "Do you have an idea? Turn it into a project!"
+      },
+      "slide2": {
+        "title": "Kodland HUB community",
+        "description": "Join our community.<br>Meet other Kodland students and create cool projects together :)"
+      },
+      "slide3": {
+        "title": "Create projects right in your browser window!",
+        "description": "Browser and internet connection is everything you need. <br>Our online platform is perfect for creating games with nothing but that."
+      }
+    },
+    "errors": {
+      "validateLogin": "Your login should containt from 2 to 32 symbols",
+      "validateName": "Your firstname should containt from 2 to 32 symbols",
+      "wrongLoginOrPassword": "Wrong login or password. Please try again.",
+      "validateLastName": "Your family name should not contain numbers",
+      "validateEmail": "Wrong e-mail",
+      "accountAlreadyExist": "This account alredy exists",
+      "accountNotFound": "This e-mail has not been found",
+      "socialLoginError": "Your social media account is not yet linked with kodland account :-("
+    },
+    "apiError": {
+      "serverError": "Server error. Please retry later"
+    },
+    "login": {
+      "title": "Log in",
+      "socials": {
+        "vk": "Vkontakte",
+        "yandex": "Yandex"
+      },
+      "or": "or",
+      "inputs": {
+        "placeholderLogin": "Login",
+        "placeholderPassword": "Password",
+        "showPassword": "Display password"
+      },
+      "buttons": {
+        "signin": "Log in",
+        "signup": "Sign up"
+      },
+      "links": {
+        "forgotLoginOrPassword": "Forgot login or password?"
+      }
+    },
+    "signup": {
+      "title": "Create account",
+      "inputs": {
+        "placeholderFirstName": "Name",
+        "placeholderLastName": "Family name",
+        "email": "E-mail"
+      },
+      "buttons": {
+        "signin": "Log in",
+        "signup": "Create account"
+      },
+      "confidentialityFirstPart": "You will get your login and password to the address specified.",
+      "confidentialitySecondPart": "By submitting your data you accept Kodland",
+      "confidentialityLink": "Privacy Policy",
+      "completed": {
+        "title": "Letter sent",
+        "spam": "Check your e-mail and log in. If you have not received the letter, please check your «Spam» folder.",
+        "serviceFirst": "Not received the letter?",
+        "serviceSecond": "Contact Support Service."
+      }
+    },
+    "recovery": {
+      "title": "Account recovery",
+      "buttons": {
+        "recovery": "Submit"
+      },
+      "descriptionFirstPart": "You will get your login data to your e-mail",
+      "descriptionSecondPart": "",
+      "linkBack": "← Back to the login page",
+      "completed": {
+        "title": "Letter sent",
+        "spam": "Check your e-mail and log in. If you have not received the letter, please check your «Spam» folder.",
+        "serviceFirst": "Not received the letter?",
+        "serviceSecond": "Contact Support Service."
+      }
+    }
+  }
+}
