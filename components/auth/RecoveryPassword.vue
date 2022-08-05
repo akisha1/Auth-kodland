@@ -44,21 +44,15 @@ export default defineComponent({
   },
   emits: ['changeTypeAuth'],
   setup(_props, { emit }) {
-    const { $userAuth } = useNuxtApp()
+    const { $userAuth, $authApi } = useNuxtApp()
     const sendRequestRecovery = ref(false)
     const errorRecoveryPassword = ref(false)
-    const validEmail = computed(() =>{
-      if (validations.email($userAuth.email)) {
-        return true;
-      } else {
-        return false;
-      }
-    })
+    const validEmail = computed(() => !!validations.email($userAuth.email))
     const recovery = async() => {
       if (validEmail && !sendRequestRecovery.value) {
         errorRecoveryPassword.value = false;
         sendRequestRecovery.value = true;
-        const response = await $userAuth.recoveryPassword();
+        const response = await $authApi.recoveryPassword();
         sendRequestRecovery.value = false;
         if (response === 'error') {
           errorRecoveryPassword.value = true;

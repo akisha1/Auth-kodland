@@ -5,20 +5,20 @@
         <div class="login-socials">
           <template v-if="slug === 'ru'">
             <a
-              href="https://..."
+              href="https://platform.kodland..."
               class="login-socials__element"
               @click="ymGoal('LoginVK')">
               <img src="~/assets/svg/white-vk.svg"/>
             </a>
             <a
-              href="https://..."
+              href="https://platform.kodland..."
               class="login-socials__element"
               @click="ymGoal('LoginYandex')">
               <img src="~/assets/svg/white-yandex.svg"/>
             </a>
           </template>
             <a
-              href="https://..."
+              href="https://platform.kodland..."
               class="login-socials__element"
               @click="ymGoal('loginGoogle')">
               <img src="~/assets/svg/white-google.svg"/>
@@ -93,7 +93,7 @@ export default defineComponent({
   emits: ['changeTypeAuth'],
   setup(_props, { emit }) {
     
-    const {$router, $userAuth} = useNuxtApp()
+    const {$router, $userAuth, $authApi} = useNuxtApp()
     const {slug} = useUserLanguage();
     const route = useRoute()
     const loginAttempt = ref(false)
@@ -101,13 +101,7 @@ export default defineComponent({
     const sendRequestSignin = ref(false)
     const errorLogin = ref(false)
     const responseError = ref(false)
-    const socialLoginError = computed(() =>{
-      if (route.query.socialLoginError) {
-        return true
-      } else {
-        return false
-      }
-    })
+    const socialLoginError = computed(() => !!route.query.socialLoginError)
 
     const ymGoal = (social) => {
       window.ym(3, 'reachGoal', social)
@@ -121,7 +115,7 @@ export default defineComponent({
       const valid = checkValid();
       if (valid) {
         sendRequestSignin.value = true;
-        const response = await $userAuth.signin();
+        const response = await $authApi.signin();
         if (!response) {
           responseError.value = true
         } else {
@@ -158,15 +152,11 @@ export default defineComponent({
       }
     }
     const checkValid = () =>{
-      if (loginAttempt.value) { // check validation only if were login attempt
-        const validationLogin = validations.countSymbols(login, 2, 32);
-        if (!validationLogin) {
-          errorLogin.value = true;
-          return false;
-        } else {
-          errorLogin.value = false;
-          return true;
-        }
+      if (loginAttempt.value) { 
+        // check validation only if were login attempt
+        const validationLogin = !!(validations.countSymbols($userAuth.username, 2, 32))
+          errorLogin.value = !validationLogin
+          return !!validationLogin
       }
     }
     const signup = () => {
@@ -178,7 +168,6 @@ export default defineComponent({
     return {
       slug,
       userAuth: $userAuth,
-      loginAttempt,
       showPassword,
       sendRequestSignin,
       errorLogin,

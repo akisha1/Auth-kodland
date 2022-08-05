@@ -4,14 +4,14 @@
       <span class="registration__title">{{$t('auth.signup.title')}}</span>
       <div class="registration-socials">
       <!-- v-tooltip="$t('auth.login.socials.vk')" -->
-        <a  href="https://..."  class="registration-socials__element">
+        <a  href="https://platform.kodland..."  class="registration-socials__element">
           <img src="~/assets/svg/white-vk.svg"/>
         </a>
-        <a href="https://...."  class="registration-socials__element">
+        <a href="https://platform.kodland..."  class="registration-socials__element">
           <img src="~/assets/svg/white-yandex.svg"/>
         </a>
         <!-- v-tooltip="'Google'" -->
-        <a href="https://..."  class="registration-socials__element">
+        <a href="https://platform.kodland..."  class="registration-socials__element">
           <img src="~/assets/svg/white-google.svg"/>
         </a>
       </div>
@@ -63,7 +63,7 @@
           {{$t('auth.signup.confidentialityFirstPart')}}
           <br>
           {{$t('auth.signup.confidentialitySecondPart')}} 
-          <a href='https://....' target='_blank'>
+          <a href='https://s.kodland...' target='_blank'>
             {{$t('auth.signup.confidentialityLink')}}
           </a>."
         </div>
@@ -85,7 +85,7 @@ export default defineComponent({
   emits: ['changeTypeAuth'],
   setup(_props, { emit }) {
     const route = useRoute()
-    const {$router, $userAuth } = useNuxtApp()
+    const {$router, $userAuth, $authApi } = useNuxtApp()
     const signupAttempt = ref('')
     const sendRequestSignup = ref(false)
     const responseError = ref(false)
@@ -95,26 +95,16 @@ export default defineComponent({
       errorLastName: false,
       errorEmail: false
     })
-    const socialLoginError = computed(() =>{
-      if (route.query.socialLoginError) {
-        return true
-      } else {
-        return false
-      }
-    })
+    const socialLoginError = computed(() => !!route.query.socialLoginError)
     const checkValid = () =>{
       if (signupAttempt.value) { // check validation only if were signup attempt
         const validationFirstName = validations.countSymbols($userAuth.firstName, 2, 32)
         const validationLastName = validations.withoutNumbers($userAuth.lastName)
         const validationEmail = validations.email($userAuth.email)
-        !validationFirstName ? errors.errorFirstName = true : errors.errorFirstName = false
-        !validationLastName ? errors.errorLastName = true : errors.errorLastName = false
-        !validationEmail ? errors.errorEmail = true : errors.errorEmail = false
-        if (!validationFirstName || !validationLastName || !validationEmail) {
-          return false
-        } else {
-          return true
-        }
+        errors.errorFirstName = !!validationFirstName
+        errors.errorLastName = !!validationLastName
+        errors.errorEmail = !!validationEmail
+        return (validationFirstName && validationLastName && validationEmail)
       }
     }
     const signin = () => {
@@ -131,7 +121,7 @@ export default defineComponent({
       if (valid) {
         responseError.value = false;
         sendRequestSignup.value = true;
-        const signup = await $userAuth.signup();
+        const signup = await $authApi.signup();
         sendRequestSignup.value = false;
         if (signup === 'ok') {
           emit('changeTypeAuth', 'signup-completed')
