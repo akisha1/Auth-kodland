@@ -45,69 +45,77 @@ export default defineNuxtPlugin(() => {
     firstName: '',
     lastName: '',
     email: '',
-    async signin() {
-      try {
-        let formData = new URLSearchParams()
-        formData.append('username', this.username)
-        formData.append('password', this.password)
-        await fetchSSO('/login', { method: 'POST', body: formData })
-        .then((tokensResponse) => {
-          $auth.changeTokens(tokensResponse.access_token, tokensResponse.refresh_token)
-        })
-        return true
-      } catch (error) {
-        return false
-      }
-    },
-    
-    async signup() {
-      try {
-        const response = await fetch('/users/register/', {
-          method: "POST",
-          body: {
-            first_name: this.firstName,
-            last_name: this.lastName,
-            email: this.email
-          },    
-          headers: {
-              "Accept-Language": 'en'
-            }
-        })
-        document.cookie = `access=${response.access_token}`;'Domain=.kodland...'
-        document.cookie = `refresh=${response.refresh_token}`;'Domain=.kodland...'
-        return 'ok';
-      } catch (error) {
-        console.log(error.response);
-        if (error.response.status >= 500) {
-          // return i18n.t('apiError.serverError')
-          return 'server error'
-        } else {
-          return error.response._data.user_msg
-        }
-      }
-    },
-    async recoveryPassword() {
-      try {
-        await fetch('/users/reset_password/', {
-          method: "POST",
-          body: {
-            email: this.email
-          },    
-          headers: {
-              "Accept-Language": 'en'
-            }
-        })
-        return true;
-      } catch (error) {
-        console.log(error.response);
-        return 'error'
+  })
+  
+
+  async function signin() {
+    try {
+      let formData = new URLSearchParams()
+      formData.append('username', userAuth.username)
+      formData.append('password', userAuth.password)
+      await fetchSSO('/login', { method: 'POST', body: formData })
+      .then((tokensResponse) => {
+        $auth.changeTokens(tokensResponse.access_token, tokensResponse.refresh_token)
+      })
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+  
+  async function signup() {
+    try {
+      const response = await fetch('/users/register/', {
+        method: "POST",
+        body: {
+          first_name: userAuth.firstName,
+          last_name: userAuth.lastName,
+          email: userAuth.email
+        },    
+        headers: {
+            "Accept-Language": 'en'
+          }
+      })
+      document.cookie = `access=${response.access_token}`;'Domain=.kodland...'
+      document.cookie = `refresh=${response.refresh_token}`;'Domain=.kodland...'
+      return 'ok';
+    } catch (error) {
+      console.log(error.response);
+      if (error.response.status >= 500) {
+        // return i18n.t('apiError.serverError')
+        return 'server error'
+      } else {
+        return error.response._data.user_msg
       }
     }
-  })
+  }
+
+  async function recoveryPassword() {
+    try {
+      await fetch('/users/reset_password/', {
+        method: "POST",
+        body: {
+          email: userAuth.email
+        },    
+        headers: {
+            "Accept-Language": 'en'
+          }
+      })
+      return true;
+    } catch (error) {
+      console.log(error.response);
+      return 'error'
+    }
+  }
   
 return {
   provide: {
     userAuth,
+    authApi: {
+      signin,
+      signup,
+      recoveryPassword
+    }
   },
 }
 })
