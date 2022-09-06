@@ -1,6 +1,6 @@
 export default defineNuxtPlugin(() => {
   const { $logger } = useNuxtApp()
-  // $logger.debug(`Started 'auth' plugin`, { tag: 'AUTH' })
+  // $logger.debug(dsdsdsdsd`Started 'auth' plugin`, { tag: 'AUTH' })
 
   const accessCookie = useCookie('access', { domain: '...' })
   const refreshCookie = useCookie('refresh', { domain: '...' })
