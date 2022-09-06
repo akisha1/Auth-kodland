@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
-// import yandexMetrikaScript from './helpers/yandexMetrikaScript.js'
+// import yandexMetrikaScript from './helpers/yandesdsdssxMetrikaScript.js'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt'],
