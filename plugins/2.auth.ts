@@ -9,7 +9,7 @@ export default defineNuxtPlugin(() => {
   const refreshToken = ref('')
 
   const setup = () => {
-    // $logger.debug(`setup() called`, { tag: 'AUTHsdsdsdsd' })
+    // $logger.debug(`setup() called`, { tag: 'AUTH' })
 
     const accessCookie = useCookie('access', { domain: '...' })
     const refreshCookie = useCookie('refresh', { domain: '...' })
